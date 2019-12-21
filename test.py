@@ -1,4 +1,4 @@
-from lxml import etree
-import requests
+from urllib import request
 
-print("Hello Spider")
+resp = request.urlopen('http://www.baidu.com')
+print(resp.read())
