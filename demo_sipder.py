@@ -1,4 +1,5 @@
 import xlwt  # 创建excel表格
+import csv
 import re  # 正则
 import urllib.request  # 发送请求
 import json
@@ -25,14 +26,14 @@ def save_execl(content_list):
     wb = xlwt.Workbook(encoding='utf-8') # 创建excel文件，设置编码
     ws = wb.add_sheet('rsfd') # 表名
     headData = ['职位名称','职位地点','时间','行业','招聘时间','人数','顾问']
-    for col in range(0,7):
+    for col in range(len(headData)):
         ws.write(0,col,headData[col],xlwt.easyxf('font:bold on'))
     index = 1
-    for j in range(0,len(content_list)): # 计算数据有多少
+    for j in range(len(content_list)): # 计算数据有多少
         for i in range(0,7):
-            ws.write(index,i,content_list[j]) # 行数 列数 数据
+            ws.write(index,i,content_list[j][i]) # 行数 列数 数据
         index += 1
-    wb.save(newTable)
+        wb.save(newTable)
 
 def save_txt(content_list):
     with open('1.txt','a') as f:
@@ -40,9 +41,15 @@ def save_txt(content_list):
             f.write(json.dumps(content,ensure_ascii=False,indent=2))
             f.write('\n')
 
+def save_csv(content_list):
+    with open('data.csv','w') as f:
+        writer = csv.writer(f)
+        writer.writerow(content_list)
+
 
 if __name__ == "__main__":
    content_list =  getData()
+   save_csv(content_list)
 #    save_execl(content_list)
 #    save_txt(content_list)
 
