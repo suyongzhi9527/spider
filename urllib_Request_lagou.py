@@ -1,4 +1,6 @@
 from urllib import request,parse
+import requests
+import json
 
 url = 'https://www.lagou.com/jobs/positionAjax.json?xl=%E5%A4%A7%E4%B8%93&px=default&needAddtionalResult=false'
 
@@ -14,6 +16,14 @@ data = {
     'kd':'python爬虫'
 }
 
-req = request.Request(url,headers=headers,method='POST',data=parse.urlencode(data).encode('utf-8'))
-resp = request.urlopen(req)
-print(resp.read().decode("utf-8")) 
+urls = 'https://www.lagou.com/jobs/list_python?labelWords=&fromSearch=true&suginput='
+
+s = requests.Session()
+# 获取搜索页的cookies
+s.get(urls,headers = headers,timeout = 3)
+
+cookie = s.cookies
+
+req = s.post(url,data=data,headers = headers,cookies = cookie,timeout = 5).text
+dict_list = json.loads(req)
+print(dict_list['content'])
