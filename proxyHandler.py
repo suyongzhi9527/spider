@@ -14,7 +14,6 @@ opener = request.build_opener(handler)
 # 3.使用opener发送请求
 res = opener.open(url2)
 print(res.read())
-
 """
 ProxyHandler处理器(代理):
 1.代理的原理：在请求目的网站的之前，先请求代理服务器，然后让代理服务器去请求目的网站，
