@@ -68,11 +68,6 @@ if __name__ == "__main__":
         url_list = url.format(i * 25)
         print(url_list)
         html_str = get_html(url_list)
-        # print(html_str)
-    # url = url.format(1)
-    # print(url)
-    # html_str = get_html(url)
-    # print(html_str)
         movieList += get_content(html_str)
     
     print(movieList[:10])
