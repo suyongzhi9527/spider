@@ -24,12 +24,11 @@ def get_lol_image():
 
     pic_list = []
     for hero_id in js_dict:
-        # print(hero_id)
         for i in range(21):
             i = str(i)
             # https://game.gtimg.cn/images/lol/act/img/skin/big154015.jpg
             if len(i) == 1:
-                hero_num = "00" + i #001 002 003
+                hero_num = "00" + i # 001 002 003
             elif len(i) == 2:
                 hero_num = "0" + i # 010 020 030
             hero_nums = hero_id + hero_num
