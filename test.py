@@ -1,18 +1,25 @@
 import requests
+import json
 
-# r = requests.get("https://api.github.com/events")
+url = 'https://www.lagou.com/jobs/positionAjax.json?needAddtionalResult=false'
+data = {
+    'first': 'true',
+    'pn': '1',
+    'kd': 'python'
+}
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+    'Referer':'https://www.lagou.com/jobs/list_python?labelWords=&fromSearch=true&suginput=',
+    'Origin':'https://www.lagou.com'
+}
 
-# r = requests.post('https://httpbin.org/post', data = {'key':'value'})
-# payload = {'key1': 'value1', 'key2': 'value2'}
-# r = requests.get('https://httpbin.org/get', params=payload)
-payload = {'key1': 'value1', 'key2': ['value2', 'value3']}
-r = requests.get('https://httpbin.org/get', params=payload)
-print(r.url)
+urls = 'https://www.lagou.com/jobs/list_python?labelWords=&fromSearch=true&suginput='
+s = requests.Session()
+s.get(urls,headers = headers,timeout = 3)
+cookie = s.cookies
 
-"""
-爬虫:从网站抓取数据的自动化程序
-网站：静态网站，动态网站
-静态：从源代码找到所需要的数据
-动态：网站需要登录，数据js加密等，微博：ajax异步加载，今日头条
-解析数据：re  bs4  xpath  selenium  pyquery  lxml
-"""
+resp = requests.post(url,data=data,headers=headers,cookies=cookie)
+dict_list = resp.json()
+job_json = dict_list['content']['positionResult']['result']
+with open('lagou_job.json','w',encoding='utf-8') as f:
+    f.write(json.dumps(job_json,ensure_ascii=False,indent=2))

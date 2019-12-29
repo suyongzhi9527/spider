@@ -26,4 +26,4 @@ cookie = s.cookies
 
 req = s.post(url,data=data,headers = headers,cookies = cookie,timeout = 5).text
 dict_list = json.loads(req)
-print(dict_list['content'])
+print(dict_list['content']['positionResult']['result'])
