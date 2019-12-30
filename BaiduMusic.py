@@ -21,7 +21,7 @@ for song_id, song_name in zip(song_ids, song_names):
 
     dict_url = json.loads(song_url_str)  # 将str网页文本转换为json(字典)类型
 
-    song_url_mp3 = dict_url['bitrate']['file_link']
+    song_url_mp3 = dict_url['bitrate']['file_link'] 
     print(song_url_mp3)
 
     mp3 = requests.get(song_url_mp3).content
