@@ -6,9 +6,10 @@ req_header = {
 }
 
 proxies = {
-    "http": "http://113.195.169.215:9999"
+    "http": "http://106.75.177.227:8111"
 }
 
-res = requests.get("http://www.baidu.com", proxies=proxies,headers=req_header)
+res = requests.get("http://httpbin.org/ip", proxies=proxies)
 
 print(res.status_code)
+print(res.text)

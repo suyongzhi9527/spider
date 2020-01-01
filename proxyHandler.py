@@ -6,7 +6,7 @@ from urllib import request
 # print(req.read())
 
 # 使用代理
-url2 = 'http://httpbin.org/get'
+url2 = 'http://httpbin.org/ip'
 # 1.使用Proxyhandler,传入代理构建一个handler
 handler = request.ProxyHandler({"https":"157.230.250.116:8080"})
 # 2.使用上面创建的handler构建一个opener
