@@ -64,6 +64,9 @@ html_str = """
 """
 
 soup = BeautifulSoup(html_str, 'lxml')
+print(type(soup))
+# table = soup.find("div")
+# print(type(table))
 # print(soup.prettify())  # 美化格式输出
 
 # lis = soup.find_all("li") # 查找获取所有的li标签
@@ -93,10 +96,10 @@ soup = BeautifulSoup(html_str, 'lxml')
 #     url = a.attrs['href']
 #     print(url)
 
-lis = soup.find_all("li")
-job_list = []
-for li in lis:
-    item = {}
+# lis = soup.find_all("li")
+# job_list = []
+# for li in lis:
+#     item = {}
     # a = li.find_all("a")
     # title = a[1].string
     # pic = a[0]['href']
@@ -112,10 +115,31 @@ for li in lis:
     # item['address'] = address
     # job_list.append(item)
     # infos = list(li.strings) # 这个方法不完美，会把空格换行等字符输出
-    infos = list(li.stripped_strings)  # 自动去除换行空格字符
-    item['职位'] = infos[0]
-    item['年薪'] = infos[1]
-    item['工作地点'] = infos[2]
-    item['公司'] = infos[3]
-    job_list.append(item)
-print(job_list)
+#     infos = list(li.stripped_strings)  # 自动去除换行空格字符
+#     item['职位'] = infos[0]
+#     item['年薪'] = infos[1]
+#     item['工作地点'] = infos[2]
+#     item['公司'] = infos[3]
+#     job_list.append(item)
+# print(job_list)
+
+# lis = soup.select("li")
+# for li in lis:
+#     print(li)
+#     print("*"*30)
+
+# lis = soup.select("li")[1]
+# print(lis)
+
+# p = soup.select("p.gray")
+# print(p)
+
+# a = soup.select("a")
+# for i in a:
+#     href = i['href']
+#     print(href)
+
+# lis = soup.select("li")
+# for li in lis:
+#     infos = list(li.stripped_strings)
+#     print(infos)
