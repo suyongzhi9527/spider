@@ -1,14 +1,14 @@
 import pymysql
 
 db = pymysql.connect(
-    host = 'localhost',
-    user = 'root',
-    password = '123456',
-    database = 'school',
-    port = 3306
+    host='localhost',
+    user='root',
+    password='123456',
+    database='school',
+    port=3306
 )
 
-cursor = db.cursor() # 创建一个游标对象
+cursor = db.cursor()  # 创建一个游标对象
 # 查询数据
 # cursor.execute("select * from tb_college")
 # result = cursor.fetchall()
@@ -76,10 +76,10 @@ cursor = db.cursor() # 创建一个游标对象
 # db.commit()
 
 # 更新数据
-sql = """
-update tb_college set collmaster = '封于修' where collid = 3
-"""
-cursor.execute(sql)
-db.commit()
+# sql = """
+# update tb_college set collmaster = '封于修' where collid = 3
+# """
+# cursor.execute(sql)
+# db.commit()
 
 db.close()
