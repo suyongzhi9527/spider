@@ -6,7 +6,7 @@ req_header = {
 }
 
 proxies = {
-    "http": "http://106.75.177.227:8111"
+    "https": "182.35.80.229:9999"
 }
 
 res = requests.get("http://httpbin.org/ip", proxies=proxies)
