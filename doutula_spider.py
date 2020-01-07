@@ -9,7 +9,10 @@ def parse_page(url):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'
     }
-    response = requests.get(url, headers = headers)
+    proxies = {
+        "https": "129.205.106.42:8080"
+    }
+    response = requests.get(url, headers=headers,proxies=proxies)
     text = response.text
     # resp = urllib.request.Request(url, headers=headers)
     # page = urllib.request.urlopen(resp)
@@ -39,7 +42,6 @@ def main():
         url = "http://www.doutula.com/photo/list/?page=%d" % i
         print("################第%d页开始下载################" % i)
         parse_page(url)
-        
 
 
 if __name__ == "__main__":

@@ -11,6 +11,9 @@ class Procuder(threading.Thread):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'
     }
+    proxies = {
+        "https": "129.205.106.42:8080"
+    }
 
     def __init__(self, page_queue, img_queue, *args, **kwargs):
         super(Procuder, self).__init__(*args, **kwargs)
@@ -25,7 +28,7 @@ class Procuder(threading.Thread):
             self.parse_page(url)
 
     def parse_page(self, url):
-        response = requests.get(url, headers=self.headers)
+        response = requests.get(url, headers=self.headers,proxies=self.proxies)
         text = response.text
         html = etree.HTML(text)
         # 过滤class为gif的图片
@@ -62,8 +65,8 @@ class Consumer(threading.Thread):
 
 
 def main():
-    page_queue = Queue(200)
-    img_queue = Queue(1500)
+    page_queue = Queue(100)
+    img_queue = Queue(1000)
     for i in range(1, 101):
         url = "http://www.doutula.com/photo/list/?page=%d" % i
         page_queue.put(url)
