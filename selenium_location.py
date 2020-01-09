@@ -1,4 +1,5 @@
 from selenium import webdriver
+import time
 
 """
 selenium使用的注意点
@@ -24,6 +25,6 @@ driver.get("http://duanziwang.com/category/%E7%BB%8F%E5%85%B8%E6%AE%B5%E5%AD%90/
 # for h1 in ret1:
 #     print(h1.find_element_by_xpath("./a").get_attribute("href"))
 
-print(driver.find_element_by_link_text(">").get_attribute("href"))
+time.sleep(2)
 
 driver.quit()
