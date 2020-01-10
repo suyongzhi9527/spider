@@ -9,14 +9,8 @@ def parse_page(url):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'
     }
-    proxies = {
-        "https": "129.205.106.42:8080"
-    }
-    response = requests.get(url, headers=headers,proxies=proxies)
+    response = requests.get(url, headers=headers)
     text = response.text
-    # resp = urllib.request.Request(url, headers=headers)
-    # page = urllib.request.urlopen(resp)
-    # text = page.read().decode()
     html = etree.HTML(text)
     # 过滤class为gif的图片
     imgs = html.xpath(
@@ -28,17 +22,12 @@ def parse_page(url):
         alt = re.sub(r'[\?？。.!！,，]', '', alt)  # 替换掉特殊字符
         suffix = os.path.splitext(img_urls)[1]  # 截取图片后缀
         filename = alt + suffix  # 拼接后缀,组成图片名
-        opener = request.build_opener()
-        opener.addheaders = [
-            ('User-Agent', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36')
-        ]
-        request.install_opener(opener)
         request.urlretrieve(img_urls, 'images/' + filename)
         print("下载成功-> %s" % filename)
 
 
 def main():
-    for i in range(1, 101):
+    for i in range(1, 11):
         url = "http://www.doutula.com/photo/list/?page=%d" % i
         print("################第%d页开始下载################" % i)
         parse_page(url)
