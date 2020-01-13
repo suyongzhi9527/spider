@@ -4,6 +4,7 @@ import json
 from bs4 import BeautifulSoup
 from lxml import etree
 
+
 class zbxx_spider:
     def __init__(self):
         self.url_temp = "http://www.dg.gov.cn/machong/zbxx/list.shtml","http://www.dg.gov.cn/machong/zbxx/list_{}.shtml"
