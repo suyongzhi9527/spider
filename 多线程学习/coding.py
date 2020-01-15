@@ -11,9 +11,9 @@ class MyThread(threading.Thread):
         self.counter = counter
 
     def run(self):
-        print("开始线程ID%s: %s" % (self.threadID,self.name))
+        print("开始线程ID%s: %s" % (self.threadID, self.name))
         start_coding(self.name, self.counter, 10)
-        print("退出线程ID%s: %s" % (self.threadID,self.name))
+        print("退出线程ID%s: %s" % (self.threadID, self.name))
 
 
 def start_coding(Pythoner, delay, counter):
