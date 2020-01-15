@@ -1,5 +1,6 @@
 import threading
 import time
+from queue import Queue
 
 
 class MyThread(threading.Thread):
