@@ -52,7 +52,30 @@ requests.get('http://github.com', timeout=0.001)  # timeout 仅对连接过程�
 
 # 代理
 proxies = {
-  "https": "http://127.0.0.1:4433"
+    "https": "http://127.0.0.1:4433"
 }
 req = requests.post("http://httpbin.org/post", proxies=proxies)
 print(req.text)
+
+# 请求头设置
+headers = {'user-agent': 'my-app/0.0.1'}
+req = requests.get("https://api.github.com/some/endpoint", headers=headers)
+
+# 下载图片
+response = requests.get("https://ptorch.com/img/logo.png")
+img = response.content
+open('logo.jpg', 'wb').write(response.content)
+
+# 获取requests响应
+# 响应状态码
+req.status_code
+# 响应头
+req.headers
+# 获取请求链接
+req.url
+# 获取网页编码
+req.encoding
+# 获取cookie
+req.cookies
+# 获取网页代码
+req.text
