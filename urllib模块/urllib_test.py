@@ -16,7 +16,7 @@ resp = request.urlopen('http://www.baidu.com')
 
 url = 'https://www.baidu.com/s?'
 parses = {
-    'kw':'爬虫'
+    'kw': '爬虫'
 }
 qs = parse.urlencode(parses)
 url = url + qs
@@ -30,7 +30,7 @@ url = url + qs
 # print(result)
 
 # urlparse和urlsplit使用
-result1 = parse.urlparse(url)
-result2 = parse.urlsplit(url)
-print(result1)
-print(result2)
+# result1 = parse.urlparse(url)
+# result2 = parse.urlsplit(url)
+# print(result1)
+# print(result2)
