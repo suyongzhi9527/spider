@@ -100,21 +100,21 @@ print(type(soup))
 # job_list = []
 # for li in lis:
 #     item = {}
-    # a = li.find_all("a")
-    # title = a[1].string
-    # pic = a[0]['href']
-    # em = li.find_all("em")
-    # salary = em[0].string
-    # p = li.find_all("p")
-    # company = p[1].string
-    # address = p[0].text[6:]
-    # item['title'] = title
-    # item['pic'] = pic
-    # item['salary'] = salary
-    # item['company'] = company
-    # item['address'] = address
-    # job_list.append(item)
-    # infos = list(li.strings) # 这个方法不完美，会把空格换行等字符输出
+# a = li.find_all("a")
+# title = a[1].string
+# pic = a[0]['href']
+# em = li.find_all("em")
+# salary = em[0].string
+# p = li.find_all("p")
+# company = p[1].string
+# address = p[0].text[6:]
+# item['title'] = title
+# item['pic'] = pic
+# item['salary'] = salary
+# item['company'] = company
+# item['address'] = address
+# job_list.append(item)
+# infos = list(li.strings) # 这个方法不完美，会把空格换行等字符输出
 #     infos = list(li.stripped_strings)  # 自动去除换行空格字符
 #     item['职位'] = infos[0]
 #     item['年薪'] = infos[1]
