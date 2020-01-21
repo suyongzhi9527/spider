@@ -55,18 +55,21 @@ def get_data(post_list):
     #     data_item['title'] = post.xpath('.//div[@class="titlelink box"]/a//text()')[0] if len(
     #         post.xpath('.//div[@class="titlelink box"]/a//text()')) > 0 else None
     #     data_item['author'] = post.xpath('.//div[@class="author box"]/a/text()')[0]
+    #     data_item['time'] = post.xpath('.//div[@class="author box"]/a[2]/text()')[0]
     #     data_item['endauthor'] = post.xpath('.//div[@class="endreply box"]/span/text()')[0]
     #
     #     data_list.append(data_item)
-    # # print(data_list)
+    # print(data_list)
     # return data_list
 
     for post in post_list:
         title = post.xpath('.//div[@class="titlelink box"]/a//text()')[0] if len(
             post.xpath('.//div[@class="titlelink box"]/a//text()')) > 0 else None
         author = post.xpath('.//div[@class="author box"]/a/text()')[0]
+        time = post.xpath('.//div[@class="author box"]/a[2]/text()')[0]
         endauthor = post.xpath('.//div[@class="endreply box"]/span/text()')[0]
-        cursor.execute("insert into urls(title, author, endauthor) values (%s, %s, %s)",(title, author, endauthor))
+        cursor.execute("insert into hupu(title, author, time , endauthor) values (%s, %s, %s, %s)",
+                       (title, author, time, endauthor))
     cursor.close()
     db.commit()
     db.close()
