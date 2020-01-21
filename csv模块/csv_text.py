@@ -29,30 +29,28 @@ import csv
 #     writer.writerow({'id':'1002','name':'bbb','age':'20'})
 #     writer.writerow({'id':'1003','name':'ccc','age':'20'})
 
-with open("data.csv","w",encoding="utf-8-sig",newline="") as f:
-    headers = ['name','age','height']
+with open("data.csv", "w", encoding="utf-8-sig", newline="") as f:
+    headers = ['name', 'age', 'height']
     item = [
         {
-            'name':'张三',
-            'age':24,
-            'height':150
+            'name': '张三',
+            'age': 24,
+            'height': 150
         },
         {
-            'name':'张四',
-            'age':25,
-            'height':124
+            'name': '张四',
+            'age': 25,
+            'height': 124
         },
         {
-            'name':'张五',
-            'age':26,
-            'height':456
+            'name': '张五',
+            'age': 26,
+            'height': 456
         }
     ]
-    writer = csv.DictWriter(f,headers)
+    writer = csv.DictWriter(f, headers)
     writer.writeheader()
     writer.writerows(item)
-
-
 
 # 本地读取csv文件
 # with open("data.csv","r") as f:
