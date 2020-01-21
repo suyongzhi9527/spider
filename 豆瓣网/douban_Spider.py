@@ -1,5 +1,16 @@
 import requests
+import pymysql
 from lxml import etree
+
+db = pymysql.connect(
+    host='localhost',
+    user='root',
+    password='123456',
+    database='scraping',
+    port=3306
+)
+
+cursor = db.cursor()
 
 url = 'https://movie.douban.com/cinema/nowplaying/guangzhou/'
 headers = {
@@ -21,6 +32,8 @@ for li in lis:
     actors = li.xpath("@data-actors")[0]  # 演员
     poster = li.xpath(".//li[@class='poster']//img/@src")[0]  # 海报
 
+    cursor.execute("insert into top250(title, score, director, actors, poster) values (%s, %s, %s,%s, %s)",(title, score, director, actors, poster))
+
     movie = {
         'title': title,
         'score': score,
@@ -29,4 +42,7 @@ for li in lis:
         'poster': poster
     }
     movie_list.append(movie)
+cursor.close()
+db.commit()
+db.close()
 print(movie_list)
