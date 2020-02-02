@@ -15,10 +15,20 @@ selenium使用的注意点
 可能会报错，因为数据还没加载出来，需要'time.sleep(3)'
 """
 
+caps = webdriver.DesiredCapabilities.FIREFOX
+caps['marionette'] = False
 # 实例化driver
-driver = webdriver.Chrome(r'F:\chromedriver.exe')
+driver = webdriver.Chrome(r'F:\chromedriver_win32\chromedriver.exe')
+driver.get('https://www.airbnb.cn/s/Shenzhen--China/all?page=1')
 
-driver.get("http://duanziwang.com/category/%E7%BB%8F%E5%85%B8%E6%AE%B5%E5%AD%90/")
+data_list = driver.find_elements_by_css_selector('div._p62vg1')
+for data in data_list:
+    print(data.text)
+
+# driver.get("https://dianping.com/search/category/7/10/p1")
+# titles = driver.find_elements_by_css_selector('div.view-content')
+# for title in titles:
+#     print(title.text)
 
 # ret1 = driver.find_elements_by_xpath("//article[@class='post']//h1")
 # # print(ret1)
@@ -27,4 +37,5 @@ driver.get("http://duanziwang.com/category/%E7%BB%8F%E5%85%B8%E6%AE%B5%E5%AD%90/
 
 time.sleep(2)
 
-driver.quit()
+# driver.quit()  # 退出整个浏览器
+# driver.close()  # 关闭当前页面
