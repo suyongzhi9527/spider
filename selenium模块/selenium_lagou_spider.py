@@ -54,7 +54,7 @@ class LagouSpider(object):
 
     def parse_detail_page(self, source):
         html = etree.HTML(source)
-        postion_name = html.xpath('//div[@class="job-name"]/@title')[0]
+        postion_name = html.xpath('//div[@class="job-name"]/@title')[0]  # 职位
         job_requets_spans = html.xpath('//dd[@class="job_request"]//span/text()')
         salary = job_requets_spans[0].strip()  # 薪资
         city = job_requets_spans[1]  # 城市
@@ -64,7 +64,7 @@ class LagouSpider(object):
         education = job_requets_spans[3].strip()  # 学历要求
         education = re.sub(r'[\s/]', '', education)
         desc = "".join(html.xpath('//dd[@class="job_bt"]//text()')).strip()  # 职位详情
-        company_name = html.xpath('//h3[@class="fl"]/em/text()')[0].strip()
+        company_name = html.xpath('//h3[@class="fl"]/em/text()')[0].strip()  # 公司
         postion = {
             'name': postion_name,
             'company': company_name,
