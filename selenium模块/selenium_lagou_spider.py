@@ -17,40 +17,40 @@ class LagouSpider(object):
 
     def run(self):
         self.driver.get(self.url)
-        while True:
+        while True:  # 循环点击下一页
             source = self.driver.page_source
             WebDriverWait(driver=self.driver, timeout=10).until(
                 EC.presence_of_element_located((By.XPATH, '//div[@class="pager_container"]/span[last()]'))
             )
             self.parse_list_page(source)
             try:
-                next_btn = self.driver.find_element_by_xpath('//div[@class="pager_container"]/span[last()]')
-                if "pager_next pager_next_disabled" in next_btn.get_attribute('class'):
-                    break
+                next_btn = self.driver.find_element_by_xpath('//div[@class="pager_container"]/span[last()]')  # 下一页按钮
+                if "pager_next pager_next_disabled" in next_btn.get_attribute('class'):  # 如果是最后一页不能点击
+                    break  # 就结束循环
                 else:
-                    next_btn.click()
+                    next_btn.click()  # 点击下一页按钮
             except:
                 print(source)
             time.sleep(2)
 
     def parse_list_page(self, source):
         html = etree.HTML(source)
-        links = html.xpath('//a[@class="position_link"]/@href')
+        links = html.xpath('//a[@class="position_link"]/@href')  # 获取详情页的url
         for link in links:
-            self.request_detail_page(link)
+            self.request_detail_page(link)  # 请求详情页
             time.sleep(2)
 
     def request_detail_page(self, url):
         # self.driver.get(url)
-        self.driver.execute_script("window.open('%s')" % url)
-        self.driver.switch_to.window(self.driver.window_handles[1])
+        self.driver.execute_script("window.open('%s')" % url)  # 打开新的页面
+        self.driver.switch_to.window(self.driver.window_handles[1])  # 切换到新的页面
         WebDriverWait(driver=self.driver, timeout=10).until(
             EC.presence_of_element_located((By.XPATH, '//div[@class="job-name"]'))
         )
-        source = self.driver.page_source
-        self.parse_detail_page(source)
-        self.driver.close()
-        self.driver.switch_to.window(self.driver.window_handles[0])
+        source = self.driver.page_source  # 获取详情页的源代码
+        self.parse_detail_page(source)  # 解析详情页
+        self.driver.close()  # 关闭当前页面详情页
+        self.driver.switch_to.window(self.driver.window_handles[0])  # 切换回第一页
 
     def parse_detail_page(self, source):
         html = etree.HTML(source)
