@@ -20,9 +20,9 @@ def request_list_page():
     }
     for i in range(1, 2):
         data['pn'] = i
-        s = requests.Session()
-        s.get(base_url, headers=headers, timeout=3)
-        cookies = s.cookies
+        session = requests.Session()
+        session.get(base_url, headers=headers, timeout=3)
+        cookies = session.cookies
         response = requests.post(url, headers=headers, data=data, cookies=cookies)
         result = response.json()
         positions = result['content']['positionResult']['result']
