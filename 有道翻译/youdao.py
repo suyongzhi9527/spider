@@ -11,14 +11,19 @@ headers = {
     "Cookie": "OUTFOX_SEARCH_USER_ID=-237170162@10.169.0.84; OUTFOX_SEARCH_USER_ID_NCOO=994120418.9853693; _ntes_nnid=e61ea52dfbf7f13653e3674375c16f15,1575719676416; DICT_UGC=be3af0da19b5c5e6aa4e17bd8d90b28a|; JSESSIONID=abcwKpPv5EsB1aLHyuvax; ___rl__test__cookies=1580905690483"
 }
 
-r = str(int(time.time() * 1000))
-random_num = random.randint(0, 9)
-i = r + str(random_num)
+r = str(int(time.time() * 1000))  # 返回当前时间戳生成13位秒单位时间,乘1000是为了向右进三位小数点,先强制转换成整型再转换为字符串
+print(r)
+random_num = random.randint(0, 9)  # 生成一位随机数
+i = r + str(random_num)  # 时间戳加上一位随机数生成14位数字
 
 
 def data_new(e):
+    """
+    e: 翻译的内容
+    i: 14位数字
+    """
     str_sign = "fanyideskweb" + e + i + "n%A-rKaT5fb[Gy?;N5@Tj"
-    md5 = hashlib.md5()
+    md5 = hashlib.md5()  # md5加密
     md5.update(str_sign.encode())
     sign = md5.hexdigest()
     data = {
