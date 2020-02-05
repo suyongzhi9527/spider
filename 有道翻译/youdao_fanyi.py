@@ -18,8 +18,8 @@ url = "http://fanyi.youdao.com/translate?smartresult=dict&smartresult=rule"
 
 res = requests.post(url, data=data, headers=headers)
 
-# print(res.status_code)
+print(res.status_code)
 print(type(res.text))
-# dict_ret = json.loads(res.text)
-# result = dict_ret["translateResult"][0][0]["tgt"]
-# print("翻译结果:{}".format(result))
+dict_ret = json.loads(res.text)
+result = dict_ret["translateResult"][0][0]["tgt"]
+print("翻译结果:{}".format(result))
