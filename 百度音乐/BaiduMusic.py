@@ -27,5 +27,5 @@ for song_id, song_name in zip(song_ids, song_names):
     mp3 = requests.get(song_url_mp3).content
 
     # 保存
-    with open(r'F:\\spider_learn\\music\\%s.mp3' % song_name, 'wb') as f:
+    with open(r'music\\%s.mp3' % song_name, 'wb') as f:
         f.write(mp3)
