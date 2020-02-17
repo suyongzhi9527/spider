@@ -12,7 +12,7 @@ headers = {
 }
 
 r = str(int(time.time() * 1000))  # 返回当前时间戳生成13位秒单位时间,乘1000是为了向右进三位小数点,先强制转换成整型再转换为字符串
-print(r)
+# print(r)
 random_num = random.randint(0, 9)  # 生成一位随机数
 i = r + str(random_num)  # 时间戳加上一位随机数生成14位数字
 
