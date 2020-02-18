@@ -1,0 +1,12 @@
+1.获取所有城市的url链接
+https://www.fang.com/SoufunFamily.htm
+2.获取所有城市的新房url链接
+广州:https://gz.fang.com/
+广州新房:https://gz.newhouse.fang.com/house/s/
+3.获取所有城市的二手房url链接
+广州:https://gz.fang.com/
+广州二手房:https://gz.esf.fang.com/
+
+北京例外:
+北京新房:https://newhouse.fang.com/house/s/
+北京二手房:https://esf.fang.com/
