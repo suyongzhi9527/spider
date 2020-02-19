@@ -2,12 +2,14 @@
 import scrapy
 import re
 from fang.items import NewHouseItem, ESFHouseItem
+from scrapy_redis.spiders import RedisSpider
 
 
-class SfwSpider(scrapy.Spider):
+class SfwSpider(RedisSpider):
     name = 'sfw'
     allowed_domains = ['fang.com']
-    start_urls = ['https://www.fang.com/SoufunFamily.htm']
+    # start_urls = ['https://www.fang.com/SoufunFamily.htm']
+    redis_key = "fang:start_urls"
 
     def parse(self, response):
         trs = response.xpath('//div[@class="outCont"]//tr')  # 获取所有的tr标签
