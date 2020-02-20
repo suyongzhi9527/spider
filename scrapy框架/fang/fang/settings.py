@@ -63,9 +63,9 @@ SPIDER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    'fang.pipelines.FangPipeline': 300,
-# }
+ITEM_PIPELINES = {
+   'fang.pipelines.FangPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -90,19 +90,19 @@ SPIDER_MIDDLEWARES = {
 
 # Scrapy-Redis相关配置
 # 确保request存储到redis中
-SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+# SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 
 # 确保所有的爬虫共享相同的去重指纹
-DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+# DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
 
 # 设置redis为item pipeline
-ITEM_PIPELINES = {
-    "scrapy_redis.pipelines.RedisPipeline": 300,
-}
+# ITEM_PIPELINES = {
+#     "scrapy_redis.pipelines.RedisPipeline": 300,
+# }
 
 # 在redis中保持scrapy-redis用到的队列，不会清理redis中的队列，从而可以实现暂停和恢复功能
-SCHEDULER_PERSIST = True
+# SCHEDULER_PERSIST = True
 
 # 设置链接redis信息
-REDIS_HOST = ' 192.168.0.108'
-REDIS_PORT = 6379
+# REDIS_HOST = ' 192.168.0.108'
+# REDIS_PORT = 6379
