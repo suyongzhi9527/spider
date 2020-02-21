@@ -43,11 +43,13 @@ if __name__ == '__main__':
     for page in range(1, 4):
         json_data = get_request_data(url, page)
         result = json_data['data']
-        print(result)
+        # print(result)
         for item in range(len(result)):
             # print(item)
+            title = result[item]['title']
+            # print(title)
             print('正在下载第{}个视频'.format(item))
             video_url = result[item]['video']
 
-            file_path = video_path + '/%s' % (item + 1) + '.mp4'
+            file_path = video_path + '/%s' % (title) + '.mp4'
             request.urlretrieve(video_url, file_path)
