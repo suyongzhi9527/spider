@@ -3,7 +3,8 @@ import json
 import os
 from urllib import request
 
-def get_request_data(url):
+
+def get_request_data(url, page):
     cookies = {
         '_dg_abtestInfo.7b6028a56aac520d.ce42': '1',
         '_dg_check.7b6028a56aac520d.ce42': '-1',
@@ -27,7 +28,7 @@ def get_request_data(url):
         'Accept-Language': 'zh-CN,zh;q=0.9',
     }
 
-    data = '{"cateId":2,"order":2,"recommendType":1,"page":{"showCount":20,"currentPage":1}}'
+    data = '{"cateId":2,"order":2,"recommendType":1,"page":{"showCount":20,"currentPage":%d}}' % page
     response = requests.post(url, headers=headers, cookies=cookies, data=data)
     json_data = response.json()
     return json_data
@@ -39,13 +40,14 @@ if __name__ == '__main__':
         os.mkdir(video_path)
 
     url = 'https://www.ssyer.com/apis/20001'
-    json_data = get_request_data(url)
-    result = json_data['data']
-    # print(result)
-    for item in range(len(result)):
-        # print(item)
-        print('正在下载第{}个视频'.format(item))
-        video_url = result[item]['video']
+    for page in range(1, 4):
+        json_data = get_request_data(url, page)
+        result = json_data['data']
+        print(result)
+        for item in range(len(result)):
+            # print(item)
+            print('正在下载第{}个视频'.format(item))
+            video_url = result[item]['video']
 
-        file_path = video_path + '/%s' % (item+1)+'.mp4'
-        request.urlretrieve(video_url, file_path)
+            file_path = video_path + '/%s' % (item + 1) + '.mp4'
+            request.urlretrieve(video_url, file_path)
