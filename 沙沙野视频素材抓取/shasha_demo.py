@@ -40,15 +40,19 @@ if __name__ == '__main__':
         os.mkdir(video_path)
 
     url = 'https://www.ssyer.com/apis/20001'
+    count = 0
     for page in range(1, 4):
         json_data = get_request_data(url, page)
         result = json_data['data']
         # print(result)
+
         for item in range(len(result)):
             # print(item)
             title = result[item]['title']
             # print(title)
             print('正在下载第{}个视频'.format(item))
+            count = count + 1
+            # print('\r当前进度: {:.2f}%'.format(count * 100 / len(result)), end='')
             video_url = result[item]['video']
 
             file_path = video_path + '/%s' % (title) + '.mp4'
