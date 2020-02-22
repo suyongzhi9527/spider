@@ -36,8 +36,8 @@ class Consumer(threading.Thread):
             while gMoney < money:
                 if gTimes >= gTotalTimes:
                     gCondition.release()
-                    return 
-                print("%s消费了%d元钱,剩余%d元钱,不足!" % (threading.current_thread(),gMoney,money))
+                    return
+                print("%s消费了%d元钱,剩余%d元钱,不足!" % (threading.current_thread(), gMoney, money))
                 gCondition.wait()
             gMoney -= money
             print("%s消费了%d元钱,剩余%d元钱" %

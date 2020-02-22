@@ -2,8 +2,9 @@ import time
 import threading
 from queue import Queue
 
+
 class CustomThread(threading.Thread):
-    def __init__(self,queue):
+    def __init__(self, queue):
         threading.Thread.__init__(self)
         self.__queue = queue
 
@@ -15,7 +16,8 @@ class CustomThread(threading.Thread):
 
 
 def moyu():
-    print(" 开始摸鱼 %s" % (time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())))
+    print(" 开始摸鱼 %s" % (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())))
+
 
 def queue_pool():
     queue = Queue(5)
