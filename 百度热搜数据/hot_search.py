@@ -38,11 +38,10 @@ def get_baidu_hot():
     driver.get("https://voice.baidu.com/act/virussearch/virussearch/?from=osari_map&tab=0&infomore=1")
 
     # print(driver.page_source)
-    btn = driver.find_element_by_xpath('//div[@class="VirusHot_1-4-9_1Fqxy-"]')
+    btn = driver.find_element_by_xpath('//div[@class="VirusHot_1-5-3_1Fqxy-"]')
     btn.click()
     time.sleep(1)
-    VirusHot = driver.find_elements_by_xpath(
-        '//div[@class="VirusHot_1-4-9_32AY4F VirusHot_1-4-9_2RnRvg"]//a//span[@class="VirusHot_1-4-9_24HB43"]')
+    VirusHot = driver.find_elements_by_xpath('//div[@class="VirusHot_1-5-3_32AY4F VirusHot_1-5-3_2RnRvg"]//a//span[@class="VirusHot_1-5-3_24HB43"]')
     content = [i.text for i in VirusHot]
     return content
 
