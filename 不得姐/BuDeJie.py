@@ -1,41 +1,27 @@
-import requests
+import urllib.request
+import re
+
+"""
+1. 分析页面URL和视频文件URL特征
+2. 获取网页源代码HTML,解决反爬机制
+3. 批量下载视频储存
+"""
 
 
-class TiebaSpider:
-    def __init__(self, tieba_name):
-        self.tieba_name = tieba_name
-        self.url_temp = "https://tieba.baidu.com/f?kw=" + tieba_name + "&ie=utf-8&pn={}"
-        self.req_header = {
-            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
-        }
-
-    def get_url_list(self):
-        url_list = []
-        for i in range(1000):
-            url_list.append(self.url_temp.format(i * 50))
-        return url_list
-
-    def parse_url(self, url):
-        print(url)
-        res = requests.get(url, headers=self.req_header)
-        return res.content.decode()
-
-    def save_html(self, html_str, page_num):
-        file_name = "{}-第{}页.html".format(self.tieba_name, page_num)
-        with open(file_name, "w", encoding="utf-8") as f:
-            f.write(file_name)
-
-    def run(self):
-        # 1.构造url列表
-        url_list = self.get_url_list()
-        # 2.遍历，发送请求，获取响应
-        for url in url_list:
-            html_str = self.parse_url(url)
-            # 3.保存
-            page_num = url_list.index(url) + 1  # 页数码
-            self.save_html(html_str, page_num)
+def getVideo(page):
+    req = urllib.request.Request("http://www.budejie.com/video/%s" % page)
+    # 通过页面增加头文件
+    req.add_header("User-Agent",
+                   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36")
+    html = urllib.request.urlopen(req).read()
+    html = html.decode("utf-8")
+    reg = r'data-mp4="(.*?)"'
+    for i in re.findall(reg, html):
+        filename = i.split("/")[-1]  # 以/为分割符，保留最后一段，即MP4的文件名
+        print("正在下载%s视频" % filename)
+        urllib.request.urlretrieve(i, "mp4/%s" % filename)
 
 
 if __name__ == '__main__':
-    tieba = TiebaSpider("李毅")
-    tieba.run()
+    for i in range(1, 20):
+        getVideo(i)
