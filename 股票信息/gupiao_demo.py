@@ -5,8 +5,10 @@ import pymysql
 from pyquery import PyQuery as pq
 
 
+# 数据库连接
 def connect():
     conn = pymysql.connect('localhost', 'root', '123456', 'stocks')
+    # 获取操作游标
     cursor = conn.cursor()
     return {'conn': conn, 'cursor': cursor}
 
@@ -49,6 +51,7 @@ def getStockInfo(lists, urls):
             dict1 = json.loads(r.text[14:int(len(r.text)) - 1])
             # print(dict1)
 
+            # 获取字典中的数据构建写入数据模板
             insert_data = {
                 "code": stock,
                 "name": dict1['info'][stock]['name'],
@@ -67,6 +70,7 @@ def getStockInfo(lists, urls):
             print(stock, ":写入完成")
         except Exception as e:
             print("写入异常-->%s" % e)
+            # 遇到错误继续循环
             continue
 
 
