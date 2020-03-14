@@ -1,4 +1,5 @@
 import requests
+from pprint import pprint
 from bs4 import BeautifulSoup
 
 
@@ -11,7 +12,7 @@ def get_movies():
     for i in range(0, 10):
         link = 'https://movie.douban.com/top250?start=' + str(i * 25)
         r = requests.get(link, headers=headers, timeout=10)
-        print(str(i + 1), "页响应码:", r.status_code)
+        # print(str(i + 1), "页响应码:", r.status_code)
         soup = BeautifulSoup(r.text, 'lxml')
         hd_list = soup.find_all('div', class_='hd')
         for each in hd_list:
@@ -23,4 +24,5 @@ def get_movies():
 
 
 movies = get_movies()
-print(movies)
+pprint(movies)
+# print(movies)

@@ -35,7 +35,7 @@ class toutiao_spider:
             url = self.url_temp.format(num)
             # 2.发送请求，获取响应
             json_str = self.parse_url(url)
-            # print(json_str)
+            print(json_str)
             # 3.提取数据
             content_list = self.get_content_list(json_str)
             # 4.保存

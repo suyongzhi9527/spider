@@ -2,7 +2,7 @@ from selenium import webdriver
 import time
 
 # 实例化driver
-driver = webdriver.Chrome(r'F:\chromedriver.exe')
+driver = webdriver.Chrome(r'F:\chromedriver_win32\chromedriver.exe')
 driver.get("https://www.douban.com/")
 iframe = driver.find_element_by_tag_name("iframe")
 driver.switch_to_frame(iframe)
