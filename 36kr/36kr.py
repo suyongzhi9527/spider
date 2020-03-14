@@ -2,6 +2,7 @@ import re
 import json
 import csv
 import requests
+from pprint import pprint  # 在控制台美化输出
 
 url = 'https://36kr.com/'
 headers = {
@@ -14,6 +15,7 @@ html_str = res.content.decode()
 
 ret = re.findall("<script>window.initialState=(.*?)</script>", html_str)[0]
 ret = json.loads(ret)
+# print(ret)
 item_list = []
 for i in range(len(ret["homeData"]["data"]["latestArticle"]["data"])):
     item = {}
@@ -22,11 +24,14 @@ for i in range(len(ret["homeData"]["data"]["latestArticle"]["data"])):
     item['summary'] = ret["homeData"]["data"]["latestArticle"]["data"][i]["post"]["summary"]
     item['published_at'] = ret["homeData"]["data"]["latestArticle"]["data"][i]["post"]["published_at"]
     item_list.append(item)
-
-    with open("36kr.csv","w",encoding="utf-8-sig",newline="") as f:
-        headers = ['title','cover','summary','published_at']
-        writer = csv.DictWriter(f,headers)
+# pprint(item_list)
+# print(item_list)
+#
+    with open("36kr.csv", "w", encoding="utf-8-sig", newline="") as f:
+        headers = ['title', 'cover', 'summary', 'published_at']
+        writer = csv.DictWriter(f, headers)
         writer.writeheader()
         writer.writerows(item_list)
-        # for item_li in item_list:
-        #     f.write(json.dumps(item_li,ensure_ascii=False,indent=2))
+print("写入csv完成!")
+#         # for item_li in item_list:
+#         #     f.write(json.dumps(item_li,ensure_ascii=False,indent=2))
