@@ -32,8 +32,8 @@ def get_video(html):
     for urls in item:
         # print(urls)
         video_html = get_html(urls)
-        real_url = re.findall('<script.*?srcUrl="(.*?)"', video_html, re.S)
-        video_name = re.findall('<h1 class="video-tt">(.*?)</h1>', video_html, re.S)
+        real_url = re.findall(r'<script.*?srcUrl="(.*?)"', video_html, re.S)
+        video_name = re.findall(r'<h1 class="video-tt">(.*?)</h1>', video_html, re.S)
 
         for name, link in zip(video_name, real_url):
             # name = re.sub(r'[,.!:"\']+', '', name)
