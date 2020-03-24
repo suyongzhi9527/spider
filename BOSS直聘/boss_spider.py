@@ -1,14 +1,17 @@
 import time
 
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from lxml import etree
 
 
 class BossSpider(object):
     driver_path = r'F:\chromedriver_win32\chromedriver.exe'
+    c_options = Options()
+    c_options.add_argument('--headless')
 
     def __init__(self):
-        self.driver = webdriver.Chrome(executable_path=self.driver_path)
+        self.driver = webdriver.Chrome(executable_path=self.driver_path, chrome_options=self.c_options)
         self.url = 'https://www.zhipin.com/'
 
     def run(self):
