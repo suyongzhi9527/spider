@@ -10,10 +10,13 @@ import pymysql
 
 browser = webdriver.Chrome(r'F:\chromedriver_win32\chromedriver.exe')  # 构造一个webdriver对象
 wait = WebDriverWait(browser, 10)  # 指定等待条件
-KEYWORD = 'ipad'  # 指定关键词
+# KEYWORD = 'ipad'  # 指定关键词
+
+db = pymysql.connect('localhost', 'root', '123456', 'tb_product')
+cursor = db.cursor()
 
 
-def index_page(page):
+def index_page(page, KEYWORD):
     """
     抓取索引页
     :page 页码
@@ -67,10 +70,6 @@ def get_products():
         save_mysql(product)
 
 
-db = pymysql.connect('localhost', 'root', '123456', 'tb_product')
-cursor = db.cursor()
-
-
 def save_mysql(result):
     cursor = db.cursor()
     sql = 'insert into `product` (`image`,`price`,`deal`,`title`,`shop`,`location`) values ("{}","{}","{}","{}","{}","{}")'
@@ -87,8 +86,9 @@ def main():
     """
     遍历每一页
     """
+    KEYWORD = input("请输入关键词: ")
     for i in range(1, MAX_PAGE + 1):
-        index_page(i)
+        index_page(i, KEYWORD)
 
 
 if __name__ == '__main__':
