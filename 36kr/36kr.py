@@ -33,5 +33,3 @@ for i in range(len(ret["homeData"]["data"]["latestArticle"]["data"])):
         writer.writeheader()
         writer.writerows(item_list)
 print("写入csv完成!")
-#         # for item_li in item_list:
-#         #     f.write(json.dumps(item_li,ensure_ascii=False,indent=2))
