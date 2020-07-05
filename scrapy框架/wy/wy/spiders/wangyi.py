@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+import copy
 from selenium import webdriver
 
 
@@ -34,3 +35,26 @@ class WangyiSpider(scrapy.Spider):
         div_list = response.xpath("//div[@class='ndi_main']/div")
 
         print(len(div_list))
+
+        for div in div_list:
+            item = {}
+            item['group'] = title
+            img_url = div.xpath('./a/img/@src').extract_first()
+            article_url = div.xpath('./a/img/@href').extract_first()
+            head = div.xpath('./a/img/@alt').extract_first()
+            keywords = div.xpath('//div[@class="keywords"]//text()').extract()
+            # 将列表内容转换成字符串
+            content = "".join([i.strip() for i in keywords])
+            item['img_url'] = img_url
+            item['article_url'] = article_url
+            item['head'] = head
+            item['keywords'] = keywords
+
+            yield scrapy.Request(
+                url=article_url,
+                callback=self.parse_detail,
+                meta={'item': copy.deepcopy(item)}
+            )
+
+    def parse_detail(self, response):
+        pass

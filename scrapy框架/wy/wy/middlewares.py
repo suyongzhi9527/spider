@@ -4,8 +4,9 @@
 #
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-
+import time
 from scrapy import signals
+from scrapy.http import HtmlResponse
 
 
 class WySpiderMiddleware(object):
@@ -87,7 +88,20 @@ class WyDownloaderMiddleware(object):
         # - return a Response object
         # - return a Request object
         # - or raise IgnoreRequest
-        return response
+        # 拦截 响应
+        if request.url in ['http://news.163.com/domestic/', 'http://news.163.com/world/', 'http://war.163.com/',
+                           'http://news.163.com/air/']:
+
+            spider.bro.get(url=request.url)
+            js = 'window.scrollTo(0,document.body.scrollHeight)'
+            spider.bro.execute_script(js)
+            time.sleep(3)
+            page_text = spider.bro.page_source
+
+            return HtmlResponse(url=spider.bro.current_url, body=page_text, encoding='utf-8')
+
+        else:
+            return response
 
     def process_exception(self, request, exception, spider):
         # Called when a download handler or a process_request()
